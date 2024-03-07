@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  - var isMember = currentUser ? currentUser.isMember : false;
+  - var isNotMember = currentUser ? !currentUser.isMember : false;
+  - var isMemberButNotAdmin = currentUser ? currentUser.isMember && !currentUser.isAdmin : false;
+  - var isAdmin = currentUser ? currentUser.isAdmin : false;
+
+  .container
+    if currentUser
+      if isNotMember
+        a(href='/member') Become a member now!
+      if isMemberButNotAdmin
+        a(href='/admin') Become an admin now!
+      div
+        if currentUser.isMember
+          a(href='/new') Post a message!
+
+
+  .container
+    div.messages-container
+      if messages
+        each message in messages
+          .message
+            if isMember
+              p #{message.author.username} says:
+            else
+              p someone says:
+            p= message.text
+            if isAdmin
+              a(href=`/delete/${message._id}`) Delete this message
+

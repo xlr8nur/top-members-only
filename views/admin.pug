@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+   div.container 
+     h1 = title 
+     if currentUser.isAdmin 
+       p Congrats! You're an admin now! 
+     else 
+       form(method='POST' action='')
+         div  
+           label(for='password' Enter admin password:)
+           input#password(type='password', name='password', required='true', minLength='8', maxLength='32') 
+         button(type='submit') Submit 
+
+    if errors 
+       ul 
+       for error in errors 
+         li!= error.msg 

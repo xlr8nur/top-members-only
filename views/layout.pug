@@ -1,0 +1,26 @@
+doctype html 
+html 
+   head 
+      title = title 
+      link(rel='stylesheet', href='/stylesheets/style.css') 
+   body 
+      nav.navbar 
+        ul(role='list')
+          li 
+            a(href='/') Home 
+          unless currentUser 
+            li.push-to-right 
+               a(href='/signup') Create Account
+            li 
+               | &verbar;
+            li 
+               a(href='/login') Login 
+          if currentUser 
+            li.push-to-right 
+               p Welcome #{currentUser.username} ! 
+            li 
+               | &verbar;
+            li 
+               a(href='/logout') Sign out 
+    
+    block content 

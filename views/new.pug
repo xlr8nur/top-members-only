@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  div.container
+    h1 = title
+
+    form(method='POST' action='')
+      div
+        label(for="message") Enter your message:
+        textarea#message(name="message" rows="4" cols="50")
+      
+      button(type='submit') Submit your message
+
+    if errors
+        ul
+        for error in errors
+          li!= error.msg
